@@ -1,18 +1,18 @@
-// auth.controller.ts
+
 import { Controller, UseGuards, Post, Request, Body, Get } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './jwt-auth.guard';
-import { CreateUserDto } from '../user/dto/create-user.dto'; // Use o DTO do usuário
-import { UserService } from '../user/user.service'; // Importe o UserService
+import { CreateUserDto } from '../user/dto/create-user.dto'; 
+import { UserService } from '../user/user.service';
 
 @Controller('auth')
 export class AuthController {
   constructor(
     private authService: AuthService, 
-    private userService: UserService // Injete o UserService
+    private userService: UserService 
   ) {}
 
-  @Post('login') // Rota de login
+  @Post('login')
   async login(@Body() createUserDto: CreateUserDto) {
     return this.authService.login(createUserDto);
   }
@@ -20,11 +20,11 @@ export class AuthController {
   @UseGuards(JwtAuthGuard) 
   @Get('profile')
   getProfile(@Request() req) {
-    return req.user; // Retorna os dados do usuário autenticado
+    return req.user; 
   }
 
   @Post('register')
   async register(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto); // Chama o método create do UserService
+    return this.userService.create(createUserDto); 
   }
 }

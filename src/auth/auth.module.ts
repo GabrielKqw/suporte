@@ -9,20 +9,20 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    ConfigModule, // Para ler variáveis de ambiente
-    UserModule, // Para usar o UserService
+    ConfigModule,
+    UserModule,
     PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
-        secret: configService.get('JWT_SECRET'), // Obtenha o segredo do arquivo .env
-        signOptions: { expiresIn: '1d' }, // Exemplo: token expira em 1 dia
+        secret: configService.get('JWT_SECRET'), 
+        signOptions: { expiresIn: '1d' },
       }),
     }),
   ],
   providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
-  exports: [AuthService], // Exporte o AuthService para ser usado em outros módulos
+  exports: [AuthService], 
 })
 export class AuthModule {}

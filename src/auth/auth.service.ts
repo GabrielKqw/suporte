@@ -14,14 +14,14 @@ export class AuthService {
   async validateUser(email: string, pass: string): Promise<any> {
     const user = await this.userService.findOneByEmail(email);
     if (user && (await bcrypt.compare(pass, user.password))) {
-      const { password, ...result } = user; // Remova a senha do resultado
+      const { password, ...result } = user; 
       return result;
     }
     return null;
   }
 
   async login(createUserDto: CreateUserDto) {
-    // Use o CreateUserDto
+
     const user = await this.validateUser(
       createUserDto.email,
       createUserDto.password,

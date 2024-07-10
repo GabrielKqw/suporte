@@ -1,4 +1,4 @@
-// support.controller.ts
+
 import {
   Controller,
   Get,
@@ -15,7 +15,7 @@ import { UpdateSupportDto } from './dto/update-support.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('supports')
-@UseGuards(JwtAuthGuard) // Protege todas as rotas com autenticação JWT
+@UseGuards(JwtAuthGuard) 
 export class SupportController {
   constructor(private readonly supportService: SupportService) {}
 
